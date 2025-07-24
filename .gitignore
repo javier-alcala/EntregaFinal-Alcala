@@ -205,3 +205,10 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Otros
+.idea/
+.vscode/
+coverage/
+*__pycache__*
+/media
