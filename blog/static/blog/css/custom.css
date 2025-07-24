@@ -1,0 +1,39 @@
+/* Fondo Y2K */
+body {
+  background:
+      url("../assets/img/stars.png") repeat,
+      linear-gradient(135deg, #d8b4e2, #c2a0e2, #d8b4e2);
+  background-blend-mode: screen;
+  background-size: auto, 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-family: Verdana, sans-serif;
+  color: #2c004c;
+}
+
+/* Botones rectangulares en navbar */
+.nav-link.btn {
+  border-radius: 0;
+}
+
+/* Hover para botones de navbar */
+.nav-link.btn:hover {
+  background-color: #b58ec2;
+  color: #ffffff;
+}
+
+.btn-lila {
+  background-color: #D8B4E2;       /* Lila pastel */
+  color: #4B0082;                  /* Violeta oscuro */
+  border: none;
+  border-radius: 0;
+  font-weight: bold;
+  padding: 0.5rem 1.2rem;
+  font-family: Verdana, sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-lila:hover {
+  background-color: #b58ec2;      /* Más oscuro al pasar el mouse */
+  color: #ffffff;
+}
