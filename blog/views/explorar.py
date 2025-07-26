@@ -9,15 +9,18 @@ from ..forms import ComentarioForm
 def explorar(request):
     query = request.GET.get("q")
     filtro = request.GET.get("filtro")
+    posts = Post.objects.all().order_by('-fechaDeCreacion')
     if query:
         if filtro == "autor":
-            posts = Post.objects.filter(autor__username__icontains=query)
-        else:  # por defecto, busca por título
-            posts = Post.objects.filter(titulo__icontains=query)
-    else:
-        posts = Post.objects.all()
+            posts = posts.filter(autor__username__icontains=query).order_by('-fechaDeCreacion')
+        else:
+            posts = posts.filter(titulo__icontains=query).order_by('-fechaDeCreacion')
+    comentario_form = ComentarioForm()
 
-    return render(request, "blog/explorar.html", {"posts": posts})
+    return render(request, "blog/explorar.html", {
+        "posts": posts,
+        "comentario_form": comentario_form
+    })
 
 
 def agregar_comentario(request, pk):
