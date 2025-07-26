@@ -212,3 +212,4 @@ __marimo__/
 coverage/
 *__pycache__*
 /media
+.DS_Store
