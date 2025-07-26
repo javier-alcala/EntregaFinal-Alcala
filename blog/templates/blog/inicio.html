@@ -1,0 +1,33 @@
+{% extends 'blog/padre.html' %}
+{% load static %}
+
+{% block  title %}Inicio{% endblock title %}
+
+{% block contenido %}
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+        <div class="p-5" 
+            style="
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.3);
+                max-width: 600px;
+                text-align: center;
+            ">
+            <h1 style="font-family: Verdana, sans-serif; color: #4B0082; font-weight: bold;">
+                ¡Bienvenido a Blog!
+            </h1>
+            <p style="font-family: Verdana, sans-serif; color: #333; font-size: 1.2rem;">
+                En este lugar podrás plasmar todos tus pensamientos y compartir ideas
+            </p>
+
+            <hr class="my-4">
+
+            <p style="font-family: Verdana, sans-serif; color: #4B0082;">
+              Si te interesa saber más sobre el creador de la página:
+            </p>
+            <a href="{% url 'sobreMi' %}" class="btn btn-lila">
+                Sobre mí
+            </a>
+        </div>
+    </div>
+{% endblock contenido %}

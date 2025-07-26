@@ -1,0 +1,36 @@
+{% extends 'blog/padre.html' %}
+
+{% load static %}
+
+{% block title %}Sobre mí{% endblock title %}
+
+{% block contenido %}
+<div class="container d-flex justify-content-center align-items-center mt-5 mb-5">
+    <div class="p-5 w-100" style="
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        max-width: 700px;
+        font-family: Verdana, sans-serif;
+    ">
+        <h1 class="text-center mb-4" style="color: #4B0082; font-weight: bold;">
+            Sobre mí
+        </h1>
+
+        <div class="text-center mb-4">
+            <img src="{% static '/blog/assets/img/javier.jpeg' %}" alt="Foto de Javier"
+                 class="rounded-circle"
+                 style="width: 200px; height: 200px; object-fit: cover; border: 2px solid #4B0082;">
+        </div>
+
+        <p style="color: #333; font-size: 1.1rem;">
+            ¡Hola! Soy <strong>Javier</strong>, tengo 27 años y soy de <strong>San Juan, Argentina</strong>, aunque actualmente vivo en <strong>Capital Federal</strong>.
+            <br><br>
+            Soy ingeniero químico y actualmente estoy formándome como desarrollador. Este blog es parte de un proyecto donde estoy aprendiendo a programar en <strong>Django</strong> y <strong>Python</strong>.
+            <br><br>
+            Mi objetivo con este espacio es poder compartir ideas, pensamientos y crear una pequeña comunidad donde todos podamos expresarnos.
+            ¡Gracias por visitar y espero que disfrutes el contenido!
+        </p>
+    </div>
+</div>
+{% endblock contenido %}

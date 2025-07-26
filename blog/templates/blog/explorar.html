@@ -1,0 +1,104 @@
+{% extends 'blog/padre.html' %}
+{% load static %}
+
+{% block title %}Explorar{% endblock title %}
+
+{% block contenido %}
+<div class="container d-flex justify-content-center align-items-start mt-5 mb-5">
+  <div class="p-5 w-100" style="
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      max-width: 800px;
+  ">
+
+    <form method="get" action="{% url 'explorar' %}" class="mb-4">
+      <div class="row mb-2">
+        <div class="col">
+          <input type="text" name="q" class="form-control" placeholder="Buscar..." value="{{ request.GET.q }}">
+        </div>
+      </div>
+
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <label for="filtro" class="col-form-label" style="font-weight: bold;">Filtrar por:</label>
+        </div>
+        <div class="col-md-3">
+          <select name="filtro" id="filtro" class="form-select">
+            <option value="titulo" {% if request.GET.filtro == "titulo" %}selected{% endif %}>Título</option>
+            <option value="autor" {% if request.GET.filtro == "autor" %}selected{% endif %}>Autor</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <button type="submit" class="btn btn-lila w-100">Buscar</button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Título y botón de crear -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="m-0" style="font-family: Verdana, sans-serif; color: #4B0082;">
+        Explorá los posteos
+      </h2>
+      {% if request.user.is_authenticated %}
+        <a href="{% url 'post_create' %}" class="btn btn-sm btn-success">+ Crear nuevo</a>
+      {% endif %}
+    </div>
+
+    {% if request.GET.q %}
+        <p class="text-muted">Resultados para <strong>"{{ request.GET.q }}"</strong> en <strong>{{ request.GET.filtro }}</strong></p>
+    {% endif %}
+
+    {% if posts %}
+      <ul class="list-group">
+        {% for post in posts %}
+          <li class="list-group-item mb-4">
+            <h5 style="font-weight: bold;">{{ post.titulo }}</h5>
+            <p>{{ post.contenido|linebreaksbr }}</p>
+            <small class="text-muted">Publicado por {{ post.autor }} el {{ post.fechaDeCreacion|date:"d/m/Y H:i" }}</small>
+
+            <hr>
+
+            <!-- Comentarios -->
+            {% if post.comentarios.all %}
+              <h6>Comentarios:</h6>
+              <ul class="list-unstyled ps-3 border-start">
+                {% for comentario in post.comentarios.all %}
+                  <li class="mb-2 d-flex justify-content-between align-items-start">
+                    <div>
+                      <strong>{{ comentario.autor }}</strong>: {{ comentario.contenido }}<br>
+                      <small class="text-muted">{{ comentario.fechaDeCreacion|date:"d/m/Y H:i" }}</small>
+                    </div>
+                    {% if request.user == comentario.autor %}
+                      <a href="{% url 'comentario_delete' comentario.pk %}" class="btn btn-sm btn-outline-danger ms-3">Eliminar</a>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+            <!-- Formulario de agregar comentario -->
+            {% if request.user.is_authenticated %}
+              <form method="POST" action="{% url 'agregar_comentario' post.pk %}">
+                {% csrf_token %}
+                {{ comentario_form.contenido }}
+                <div class="d-flex justify-content-end mt-2">
+                  <button type="submit" class="btn btn-sm btn-lila">Comentar</button>
+                </div>
+              </form>
+            {% else %}
+              <p class="text-muted">Iniciá sesión para comentar.</p>
+            {% endif %}
+
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="alert alert-info text-center">
+        No hay posteos por ahora.
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock contenido %}
