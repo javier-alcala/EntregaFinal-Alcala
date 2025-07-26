@@ -1,0 +1,16 @@
+{% extends 'blog/padre.html' %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <div class="card p-4 shadow">
+        <h3>¿Estás seguro de que querés eliminar este comentario?</h3>
+        <p class="mt-3">{{ object.contenido }}</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+            <a href="{% url 'explorar' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
