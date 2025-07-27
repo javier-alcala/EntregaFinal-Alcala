@@ -1,5 +1,8 @@
 # EntregaFinal-Alcala
 
+El video mostrando a fondo todo el blog con las funcionalidades está en este link:
+https://www.loom.com/share/86b7ed2cc0304d268f4951ee00ca5bf5?sid=e253df1e-b7ba-4db7-bdaf-14ea9dc6c97f
+
 Al clonar el repositorio, y una vez creado el entorno virtual, hay que instalar django y pillow con el comando:
 
     pip install -r requirements.txt
